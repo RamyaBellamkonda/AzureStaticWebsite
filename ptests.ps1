@@ -2,7 +2,8 @@ Describe 'Static Website' {
 
   context 'When the website is deployed' {
     It 'should have the correct content' {
-      $content = Get-Content 'https://mycdnendpoint-green.azureedge.net'
+      $content = Invoke-WebRequest 'https://mycdnendpoint-green.azureedge.net'
+      $content  = $response.Content
       $content | Should -Be 'This is my static website!'
     }
 
