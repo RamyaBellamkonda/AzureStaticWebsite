@@ -24,13 +24,13 @@ resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2019-04-15' = {
   name: 'myCdnEndpoint-${deploymentColor}'
   location: 'UK South'
   properties: {
-    originHostHeader: storageAccount.properties.primaryEndpoints.blob,
+    originHostHeader: storageAccount.properties.primaryEndpoints.blob
     origins: [
       {
-        name: 'myOrigin',
+        name: 'myOrigin'
         properties: {
-          hostName: 'staticwebsite.azurewebsites.net',
-          httpPort: 80,
+          hostName: 'staticwebsite.azurewebsites.net'
+          httpPort: 80
           httpsPort: 443
         }
       }
