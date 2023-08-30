@@ -1,5 +1,5 @@
 param deploymentColor string
-param storageLocation string = 'UK South'
+param storageLocation string = 'westeurope'
 param cdnLocation string = 'westeurope'
 
 // Ensure that storage account name fits the criteria (3-24 characters, only lowercase letters and numbers)
