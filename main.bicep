@@ -13,6 +13,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   sku: {
     name: 'Standard_LRS'
   }
+  properties: {
+    supportsHttpsTrafficOnly: true
+    staticWebsite: {
+      enabled: true
+      indexDocument: 'index.html'
+  }
+}
 }
 
 resource cdnProfile 'Microsoft.Cdn/profiles@2023-05-01' = {
