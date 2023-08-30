@@ -12,7 +12,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 
 resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
   name: 'staticwebsite-${deploymentColor}'
-  location: 'UK South'
+  location: 'westeurope'
   properties: {
     sku: {
       name: 'microsoftcdn'  
@@ -22,7 +22,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
 
 resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2019-04-15' = {
   name: 'myCdnEndpoint-${deploymentColor}'
-  location: 'UK South'
+  location: 'westeurope'
   properties: {
     originHostHeader: storageAccount.properties.primaryEndpoints.blob
     origins: [
