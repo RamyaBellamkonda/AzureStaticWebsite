@@ -23,11 +23,6 @@ stages:
           scriptLocation: 'inlineScript'
           inlineScript: |
             az deployment group create --resource-group R_TRG --template-file main.bicep --parameters deploymentColor=$(inactiveColor)
-
-      - powershell: |
-          Install-Module -Name Pester -Force -Scope CurrentUser
-          Invoke-Pester -Script ./ptests.ps1
-        displayName: 'Run Pester Tests'
       
       - task: AzureCLI@2
         inputs:
@@ -44,4 +39,9 @@ stages:
            destination: 'AzureBlob'
            storage: storageAccountName
            containerName: '$web'
+
+      - powershell: |
+          Install-Module -Name Pester -Force -Scope CurrentUser
+          Invoke-Pester -Script ./ptests.ps1
+        displayName: 'Run Pester Tests'     
  
