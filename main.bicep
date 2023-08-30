@@ -6,7 +6,7 @@ param cdnLocation string = 'westeurope'
 var maxLength = (length(deploymentColor) > 24) ? 24 : length(deploymentColor)
 var storageAccountName = substring('sw${deploymentColor}', 0, maxLength)
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: storageAccountName
   location: storageLocation
   kind: 'StorageV2'
@@ -15,11 +15,23 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
   properties: {
     supportsHttpsTrafficOnly: true
+  }
+}
+
+resource storageAccountBlobService 'Microsoft.Storage/storageAccounts/blobServices@2021-04-01' = {
+  name: '${storageAccountName}/default'
+  properties: {
+    cors: {
+      corsRules: []
+    }
+    deleteRetentionPolicy: {
+      enabled: false
+    }
     staticWebsite: {
       enabled: true
       indexDocument: 'index.html'
+    }
   }
-}
 }
 
 resource cdnProfile 'Microsoft.Cdn/profiles@2023-05-01' = {
