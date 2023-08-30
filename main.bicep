@@ -15,7 +15,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 
-resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
+resource cdnProfile 'Microsoft.Cdn/profiles@2023-05-01' = {
   name: 'cdnProfile-${deploymentColor}'
   location: cdnLocation
   sku: {
@@ -23,7 +23,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
   }
 }
 
-resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2019-04-15' = {
+resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2023-05-01' = {
   name: 'myCdnEndpoint-${deploymentColor}'
   location: cdnLocation
   properties: {
