@@ -23,21 +23,6 @@ stages:
           scriptLocation: 'inlineScript'
           inlineScript: |
             az deployment group create --resource-group R_TRG --template-file main.bicep --parameters deploymentColor=$(inactiveColor)
-
-      - task: AzureCLI@2
-        inputs:
-          azureSubscription: 'R_AzureSN'
-          scriptType: 'bash'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            az network traffic-manager endpoint create \
-                --resource-group R_TRG \
-                --profile-name RTFM \
-                --type azureEndpoints \
-                --name mystaticwebsite-$(inactiveColor)-endpoint \
-                --endpoint-status enabled
-                --resourceGroup $(resourceGroup R_TRG)
-      
       
       - task: AzureFileCopy@4
         inputs:
