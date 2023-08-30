@@ -20,7 +20,7 @@ resource webApp 'Microsoft.Web/sites' = {
     httpsOnly: true
     appServicePlan:
       name: 'staticwebsite-plan'
-      resourceGroup: 'staticwebsite-rg'
+      resourceGroup: 'R_AzureSN'
     deployment:
       slot: production
       sitePath: '/'
