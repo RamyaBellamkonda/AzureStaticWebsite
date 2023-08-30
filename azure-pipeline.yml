@@ -43,7 +43,7 @@ stages:
                 --profile-name RTFM \
                 --type azureEndpoints \
                 --name mystaticwebsite-green-endpoint \
-                --target-resource-id "/subscriptions/516383e3-de5a-48e2-bc97-0126fb775f47/resourceGroups/R_TRG/providers/Microsoft.Storage/storageAccounts/mystaticwebsite-green"
+                --target-resource-id "/subscriptions/516383e3-de5a-48e2-bc97-0126fb775f47/resourceGroups/R_TRG/providers/Microsoft.Storage/storageAccounts/mystaticwebsite-$(inactiveColor)"
                 --endpoint-status enabled
       
       
