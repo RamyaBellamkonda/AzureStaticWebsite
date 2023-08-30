@@ -32,7 +32,7 @@ stages:
            inlineScript: |
               az storage blob upload-batch --source website/ --destination '$web' --account-name swgre
               
-      - script: sleep 300
+      - script: sleep 30
         displayName: 'Wait for 5 minutes for CDN to be available'
 
       - pwsh: |
