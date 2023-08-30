@@ -30,7 +30,7 @@ stages:
            scriptType: 'bash'
            scriptLocation: 'inlineScript'
            inlineScript: |
-              az storage blob upload-batch --source website/ --destination web --account-name storageAccountName
+              az storage blob upload-batch --source website/ --destination '$web' --account-name swgre
               
       - script: sleep 300
         displayName: 'Wait for 5 minutes for CDN to be available'
