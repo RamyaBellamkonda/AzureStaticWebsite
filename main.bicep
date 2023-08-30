@@ -13,16 +13,28 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
   name: 'staticwebsite-${deploymentColor}'
   location: 'UK South'
-  properties:
-    originHostName: 'staticwebsite.azurewebsites.net'
-    originPath: '*/*'
+  properties: {
+    sku: {
+      name: 'microsoftcdn'  
+    }
+  }
 }
 
 resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2019-04-15' = {
   name: 'myCdnEndpoint-${deploymentColor}'
   location: 'UK South'
   properties: {
-    originHostHeader: storageAccount.properties.primaryEndpoints.blob
+    originHostHeader: storageAccount.properties.primaryEndpoints.blob,
+    origins: [
+      {
+        name: 'myOrigin',
+        properties: {
+          hostName: 'staticwebsite.azurewebsites.net',
+          httpPort: 80,
+          httpsPort: 443
+        }
+      }
+    ]
   }
   parent: cdnProfile
 }
