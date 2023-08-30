@@ -22,7 +22,7 @@ stages:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            az deployment group create --resource-group R_TRG --template-file blue-green.bicep --parameters deploymentColor=$(inactiveColor)
+            az deployment group create --resource-group R_TRG --template-file main.bicep --parameters deploymentColor=$(inactiveColor)
 
       - powershell: |
           Install-Module -Name Pester -Force -Scope CurrentUser
