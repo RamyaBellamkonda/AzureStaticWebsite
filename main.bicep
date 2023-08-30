@@ -19,7 +19,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2023-05-01' = {
   name: 'cdnProfile-${deploymentColor}'
   location: 'global'
   sku: {
-    name: 'Standard_AzureFrontDoor'
+    name: 'Standard_Microsoft'
   }
 }
 
