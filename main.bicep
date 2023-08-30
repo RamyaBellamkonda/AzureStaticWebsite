@@ -19,17 +19,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
 }
 
 resource storageAccountBlobService 'Microsoft.Storage/storageAccounts/blobServices@2021-04-01' = {
-  name: '${storageAccountName}/default'
+  name: '${storageAccount.name}/default'
   properties: {
     cors: {
       corsRules: []
     }
     deleteRetentionPolicy: {
       enabled: false
-    }
-    staticWebsite: {
-      enabled: true
-      indexDocument: 'index.html'
     }
   }
 }
