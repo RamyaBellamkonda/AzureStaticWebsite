@@ -4,7 +4,7 @@ Describe 'Static Website' {
     It 'should have the correct content' {
       $content = Invoke-WebRequest 'https://mycdnendpoint-green.azureedge.net/'
       $content  = $response.Content
-      $content | Should -Be 'This is my static website!'
+      $content | Should -Be 'Welcome to Ramya Static Website!'
     }
 
     It 'should be accessible over HTTPS' {
