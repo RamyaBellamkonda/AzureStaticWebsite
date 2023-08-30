@@ -7,7 +7,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  inactiveColor: 'green' # This can be determined dynamically based on your requirements.
+  inactiveColor: 'green'
 
 stages:
 - stage: Deploy
