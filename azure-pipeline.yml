@@ -17,7 +17,7 @@ stages:
     - checkout: self
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'R_AzureSN'
+        azureSubscription: 'Azure subscription 1'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
@@ -30,7 +30,7 @@ stages:
 
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'R_AzureSN'
+        azureSubscription: 'Azure subscription 1'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
