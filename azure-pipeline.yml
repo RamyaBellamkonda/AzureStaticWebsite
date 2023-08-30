@@ -43,7 +43,7 @@ stages:
                 --profile-name RTFM \
                 --type azureEndpoints \
                 --name mystaticwebsite-$(inactiveColor)-endpoint \
-                --target-resource-id $(resourceId $(resourceGroup R_TRG) Microsoft.Storage/storageAccounts mystaticwebsite-$(inactiveColor)) \
+                --target-resource-id $(resourceId $(resourceGroup R_TRG) Microsoft.Network/trafficManagerProfiles $(inactiveColor)) \
                 --endpoint-status enabled
       
       
