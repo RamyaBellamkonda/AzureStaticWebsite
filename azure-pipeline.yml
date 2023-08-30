@@ -31,9 +31,12 @@ stages:
            scriptLocation: 'inlineScript'
            inlineScript: |
               az storage blob upload-batch --source website/ --destination $web --account-name storageAccountName
+              
+      - script: sleep 300
+        displayName: 'Wait for 5 minutes for CDN to be available'
 
       - pwsh: |
            Install-Module -Name Pester -Force -Scope CurrentUser -AllowClobber
            Invoke-Pester -Script ./ptests.ps1
-         displayName: 'Run Pester Tests'
+          displayName: 'Run Pester Tests'
     
