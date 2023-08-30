@@ -11,6 +11,7 @@ This repository contains code and configurations for deploying a static website 
 - [Testing Infrastructure](#testing-infrastructure)
 - [Azure DevOps Pipeline Setup](#azure-devops-pipeline-setup)
 - [Usage](#usage)
+- [Result](#result)
 
 ## Overview
 
@@ -50,3 +51,8 @@ This project demonstrates how to deploy a static website on Azure using Bicep te
 2. Customize the Bicep templates according to the project requirements.
 3. Configure the Azure DevOps pipeline by creating a `azure-pipelines.yml` file.
 4. Push your changes to the Git repository to trigger the Azure DevOps pipeline.
+
+## Result
+![RamyaBAzA1](https://github.com/RamyaBellamkonda/AzureStaticWebsite/assets/129672695/2003cc5c-c1ab-4c52-8ebd-7c20d803be12)
+
+
