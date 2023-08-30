@@ -1,11 +1,14 @@
 param deploymentColor string
+param storageLocation string = 'UK South'
+param cdnLocation string = 'westeurope'
 
 // Ensure that storage account name fits the criteria (3-24 characters, only lowercase letters and numbers)
-var storageAccountName = substring('sw${deploymentColor}', 0, 24)
+var maxLength = (length(deploymentColor) > 24) ? 24 : length(deploymentColor)
+var storageAccountName = substring('sw${deploymentColor}', 0, maxLength)
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: storageAccountName
-  location: 'UK South'
+  location: storageLocation
   kind: 'StorageV2'
   sku: {
     name: 'Standard_LRS'
@@ -14,7 +17,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 
 resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
   name: 'cdnProfile-${deploymentColor}'
-  location: 'westeurope'
+  location: cdnLocation
   sku: {
     name: 'Standard_Akamai'
   }
@@ -22,7 +25,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
 
 resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2019-04-15' = {
   name: 'myCdnEndpoint-${deploymentColor}'
-  location: 'westeurope'
+  location: cdnLocation
   properties: {
     originHostHeader: storageAccount.properties.primaryEndpoints.blob
     origins: [
