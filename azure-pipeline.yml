@@ -25,7 +25,7 @@ stages:
 
     - script: |
         Install-Module -Name Pester -Force -Scope CurrentUser
-        Invoke-Pester -Script ./tests.ps1
+        Invoke-Pester -Script ./ptests.ps1
       displayName: 'Run Pester Tests'
 
     - task: AzureCLI@2
@@ -35,4 +35,4 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           # Switch Azure Traffic Manager to the newly deployed (green) endpoint
-          az network traffic-manager endpoint update --resource-group R_TRG --profile-name YOUR_TRAFFIC_MANAGER_NAME --type azureEndpoints --name rstaticwebsite-$(inactiveColor)-endpoint --set targetResourceId=/subscriptions/516383e3-de5a-48e2-bc97-0126fb775f47/resourceGroups/R_TRG/providers/Microsoft.Storage/storageAccounts/rstaticwebsite-$(inactiveColor)
+          az network traffic-manager endpoint update --resource-group R_TRG --profile-name RTFM --type azureEndpoints --name rstaticwebsite-$(inactiveColor)-endpoint --set targetResourceId=/subscriptions/516383e3-de5a-48e2-bc97-0126fb775f47/resourceGroups/R_TRG/providers/Microsoft.Storage/storageAccounts/rstaticwebsite-$(inactiveColor)
