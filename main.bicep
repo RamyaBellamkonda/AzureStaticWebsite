@@ -7,7 +7,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
     accountType: 'Standard_LRS'
 }
 
-resource cdnEndpoint 'Microsoft.Cdn/profiles@2019-04-15' = {
+resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
   name: 'staticwebsite-${deploymentColor}'
   location: 'UK South'
   properties:
