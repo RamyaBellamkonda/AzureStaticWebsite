@@ -26,7 +26,7 @@ stages:
 
       - powershell: |
           Install-Module -Name Pester -Force -Scope CurrentUser
-          Invoke-Pester -Script ./tests.ps1
+          Invoke-Pester -Script ./ptests.ps1
         displayName: 'Run Pester Tests'
       
       - task: AzureCLI@2
