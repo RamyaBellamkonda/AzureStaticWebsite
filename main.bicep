@@ -3,8 +3,11 @@ param deploymentColor string
 resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: 'staticwebsite-${deploymentColor}'
   location: 'UK South'
-  properties:
-    accountType: 'Standard_LRS'
+  properties: {
+      sku: {
+         name : 'Standard_LRS'
+      }
+  }
 }
 
 resource cdnProfile 'Microsoft.Cdn/profiles@2019-04-15' = {
