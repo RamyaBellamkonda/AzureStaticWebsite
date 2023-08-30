@@ -1,13 +1,13 @@
 param deploymentColor string
 
-resource storageAccount 'Microsoft.Storage/storageAccounts' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: 'staticwebsite-${deploymentColor}'
   location: 'UK South'
   properties:
     accountType: 'Standard_LRS'
 }
 
-resource cdnEndpoint 'Microsoft.Cdn/profiles' = {
+resource cdnEndpoint 'Microsoft.Cdn/profiles@2019-04-15' = {
   name: 'staticwebsite-${deploymentColor}'
   location: 'UK South'
   properties:
@@ -15,15 +15,11 @@ resource cdnEndpoint 'Microsoft.Cdn/profiles' = {
     originPath: '*/*'
 }
 
-resource webApp 'Microsoft.Web/sites' = {
-  name: 'staticwebsite-${deploymentColor}'
+resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2019-04-15' = {
+  name: 'myCdnEndpoint-${deploymentColor}'
   location: 'UK South'
-  properties:
-    httpsOnly: true
-    appServicePlan:
-      name: 'staticwebsite-plan'
-      resourceGroup: 'R_AzureSN'
-    deployment:
-      slot: production
-      sitePath: '/'
+  properties: {
+    originHostHeader: storageAccount.properties.primaryEndpoints.blob
+  }
+  parent: cdnProfile
 }
