@@ -1,0 +1,30 @@
+jobs:
+  - job: Build
+    workspace:
+      clean: true
+    steps:
+      - task: AzureCLI@2
+        displayName: Install Bicep
+        inputs:
+          script: |
+            echo "Installing Bicep..."
+            sudo apt-get install bicep
+
+  - job: Deploy
+    dependsOn: Build
+    steps:
+      - task: AzurePowerShell@2
+        displayName: Deploy Static Website
+        inputs:
+          script: |
+            echo "Deploying static website..."
+            bicep deploy main.bicep
+            
+  - job: Test
+    dependsOn: Deploy
+    steps:
+      - task: PowerShell@2
+        displayName: Run Pester Tests
+        inputs:
+          script: |
+            .\ptests.ps1
