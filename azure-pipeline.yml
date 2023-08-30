@@ -32,8 +32,8 @@ stages:
            inlineScript: |
               az storage blob upload-batch --source website/ --destination '$web' --account-name swgre
               
-      - script: sleep 30
-        displayName: 'Wait for 5 minutes for CDN to be available'
+      - script: sleep 120
+        displayName: 'Wait for 2 minutes for CDN to be available'
 
       - pwsh: |
            Install-Module -Name Pester -Force -Scope CurrentUser -AllowClobber
