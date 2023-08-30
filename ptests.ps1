@@ -1,15 +1,16 @@
 Describe 'Static Website' {
+    context 'When the website is deployed' {
+        It 'should have the correct content' {
+            $response = Invoke-WebRequest 'https://mycdnendpoint-green.azureedge.net/index.html'
+            $content = $response.Content
 
-  context 'When the website is deployed' {
-    It 'should have the correct content' {
-      $content = Invoke-WebRequest 'https://mycdnendpoint-green.azureedge.net/'
-      $content  = $response.Content
-      $content | Should -Be 'Welcome to Ramya Static Website!'
-    }
+            $response.StatusCode | Should -Be 200
+            $content.Trim() | Should -Match 'Welcome to Ramya Static Website!'
+        }
 
-    It 'should be accessible over HTTPS' {
-      $response = Invoke-WebRequest 'https://mycdnendpoint-green.azureedge.net/'
-      $response.StatusCode | Should -Be 200
+        It 'should be accessible over HTTPS' {
+            $response = Invoke-WebRequest 'https://mycdnendpoint-green.azureedge.net/index.html'
+            $response.StatusCode | Should -Be 200
+        }
     }
-  }
 }
