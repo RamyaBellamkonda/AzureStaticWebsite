@@ -25,7 +25,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2023-05-01' = {
 
 resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2023-05-01' = {
   name: 'myCdnEndpoint-${deploymentColor}'
-  location: cdnLocation
+  location: 'global'
   properties: {
     originHostHeader: storageAccount.properties.primaryEndpoints.blob
     origins: [
