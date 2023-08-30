@@ -7,32 +7,33 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  inactiveColor: 'green' # You can determine this dynamically, depending on which environment is currently inactive.
+  inactiveColor: 'green' # This can be determined dynamically based on your requirements.
 
 stages:
 - stage: Deploy
   jobs:
-  - job: DeployStaticSite
-    steps:
-    - checkout: self
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'R_AzureSN'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          az deployment group create --resource-group R_TRG --template-file blue-green.bicep --parameters deploymentColor=$(inactiveColor)
+    - job: DeployStaticSite
+      steps:
+      - checkout: self
+      
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'R_AzureSN' # Ensure this is the name of your Azure service connection
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az deployment group create --resource-group R_TRG --template-file blue-green.bicep --parameters deploymentColor=$(inactiveColor)
 
-    - script: |
-        Install-Module -Name Pester -Force -Scope CurrentUser
-        Invoke-Pester -Script ./ptests.ps1
-      displayName: 'Run Pester Tests'
-
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'R_AzureSN'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          # Switch Azure Traffic Manager to the newly deployed (green) endpoint
-          az network traffic-manager endpoint update --resource-group R_TRG --profile-name RTFM --type azureEndpoints --name rstaticwebsite-$(inactiveColor)-endpoint --set targetResourceId=/subscriptions/516383e3-de5a-48e2-bc97-0126fb775f47/resourceGroups/R_TRG/providers/Microsoft.Storage/storageAccounts/rstaticwebsite-$(inactiveColor)
+      - powershell: |
+          Install-Module -Name Pester -Force -Scope CurrentUser
+          Invoke-Pester -Script ./tests.ps1
+        displayName: 'Run Pester Tests'
+      
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'R_AzureSN' # Ensure this is the name of your Azure service connection
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            # Switch Azure Traffic Manager to the newly deployed (green) endpoint, if applicable.
+            az network traffic-manager endpoint update --resource-group R_TRG --profile-name RTFM --type azureEndpoints --name mystaticwebsite-$(inactiveColor)-endpoint --set targetResourceId=/subscriptions/516383e3-de5a-48e2-bc97-0126fb775f47/resourceGroups/R_TRG/providers/Microsoft.Storage/storageAccounts/mystaticwebsite-$(inactiveColor)
