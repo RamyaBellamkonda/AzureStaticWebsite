@@ -47,7 +47,7 @@ resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2023-05-01' = {
       {
         name: 'myOrigin'
         properties: {
-          hostName: 'staticwebsite.azurewebsites.net'
+          hostName: replace(replace(storageAccount.properties.primaryEndpoints.web, 'https://', ''), '/', '')
           httpPort: 80
           httpsPort: 443
         }
