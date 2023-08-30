@@ -17,7 +17,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 
 resource cdnProfile 'Microsoft.Cdn/profiles@2023-05-01' = {
   name: 'cdnProfile-${deploymentColor}'
-  location: cdnLocation
+  location: 'global'
   sku: {
     name: 'Standard_AzureFrontDoor'
   }
@@ -25,7 +25,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2023-05-01' = {
 
 resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2023-05-01' = {
   name: 'myCdnEndpoint-${deploymentColor}'
-  location: 'global'
+  location: cdnLocation
   properties: {
     originHostHeader: storageAccount.properties.primaryEndpoints.blob
     origins: [
